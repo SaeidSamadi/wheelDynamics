@@ -1,0 +1,93 @@
+\documentclass[letterpaper, 10pt, conference]{ieeeconf}
+%\documentclass[10pt,english,a4paper]{IEEEtran}
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+%\usepackage[a4paper, total={14cm, 25cm}]{geometry}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[pdfencoding=auto]{hyperref}
+%\usepackage{natbib}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{soul}
+\usepackage{pdfpages}
+%\usepackage[pdftex]{graphicx}
+\usepackage{subfigure}
+\pdfminorversion=4
+
+
+\sethlcolor{green}
+
+\input{abbr.tex}
+
+\def\ankle{\text{ankle}}
+\newcommand{\TODO}[1]{{\color{red} {\bf TODO:} {#1}}}
+\newcommand{\SC}[1]{{\color{red} {\bf SC:} {#1}}}
+\renewcommand{\SS}[1]{{\color{blue} {\bf SC:} {#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+%\renewcommand\IEEEkeywordsname{Keywords}
+
+\def\pcmd{p^{cmd}}
+\def\vcmd{v^{cmd}}
+
+\title{\Large \bf
+	Wheel Kinematics and Dynamics}
+
+\author{Saeid Samadi, and Abderrahmane Kheddar
+	\thanks{Authors are with Montpellier Laboratory of Informatics,
+		Robotics and Microelectronics (LIRMM), CNRS-University of Montpellier, France.
+		Corresponding author: {\tt\footnotesize saeid.samadi@lirmm.fr}}
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\begin{abstract}
+	This study deals with the kinematic and dynamic model of wheels. Wheels are part of robot model and this modeling has a significant effect in the performance of the robot...
+\end{abstract}
+
+\begin{keywords}
+	Wheeled Robot Model, Dynamics, Kinematics
+\end{keywords}
+
+	
+%%% XXX To be uncommented on "ieeeConf" document class
+%\begin{keywords}
+%Chebyshev center
+%\end{keywords}
+\begin{comment}
+
+\begin{table}[h]
+\renewcommand{\arraystretch}{1.5}
+\caption{Table of Symbols}
+\label{table_example}
+\centering
+\begin{tabular}{p{0.09\textwidth}|p{0.09\textwidth}||p{0.09\textwidth}|p{0.09\textwidth}}
+%\begin{tabular*}{0.4\textwidth}{l | r || l | r}
+\hline
+\bfseries \centering First & \bfseries Next & me & you \\
+\hline\hline
+1.0 & 2.0\\
+\hline
+\end{tabular}
+\end{table}
+\end{comment}
+
+\section{Introduction} \label{Sec_Introduction}
+Wheel kinematics and dynamics are widely studied. Considering the multi-directional slippages, due to numerous variables such as wheel inertia, material and contact forces within these models, are challenging.  In sections~\ref{Sec_Kinematics}~and~\ref{Sec_Dynamics}, we describe the proposed method in~\cite{Seegmiller2014thesis}.
+\section{Wheel Kinematics} \label{Sec_Kinematics}
+
+\section{Wheel Dynamics} \label{Sec_Dynamics}
+
+\bibliographystyle{ieeetr}
+\bibliography{refs}
+\end{document}
