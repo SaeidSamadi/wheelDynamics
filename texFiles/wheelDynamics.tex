@@ -86,6 +86,23 @@
 Wheel kinematics and dynamics are widely studied. Considering the multi-directional slippages, due to numerous variables such as wheel inertia, material and contact forces within these models, are challenging.  In sections~\ref{Sec_Kinematics}~and~\ref{Sec_Dynamics}, we describe the proposed method in~\cite{Seegmiller2014thesis}.
 \section{Wheel Kinematics} \label{Sec_Kinematics}
 
+The case study for~\cite{Seegmiller2014thesis} is a car model with six wheels as shown in Fig.~\eqref{rocky7}
+\begin{figure}[!h] 
+	\centering
+	\subfigure[]{
+		\includegraphics[width= 0.65\columnwidth]{figs/car.png}
+		\label{Choreonoid}
+	} 
+	\subfigure[]{
+		\includegraphics[width= 0.65\columnwidth]{figs/rocky7.jpg} \label{pymanoid}
+	} 
+	\caption{(a) Model and frame diagram of the car. This model contains six wheels and the frames for the body, shafts, center of wheels and also the contact frames are defined.
+		(b) Rocky 7 test bed \protect\footnotemark}
+	\label{rocky7}
+\end{figure}
+\footnotetext{Rocky 7 is research test bed for navigation and rover-based sampling. It is approximately $60 \times 40 \times 25 \ cm$ in size and $16 \ kg$ in mass. On Rocky 7, only the front wheels are steerable, while the back bogie wheels are close together and have no steering. This mobility design concept was implemented to test the maneuverability of a system with fewer actuators.}
+
+
 \section{Wheel Dynamics} \label{Sec_Dynamics}
 
 \bibliographystyle{ieeetr}
