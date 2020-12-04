@@ -83,6 +83,115 @@
 \end{comment}
 
 \section{Introduction} \label{Sec_Introduction}
+
+We characterize the robot or vehicle wheels into:
+\begin{itemize}
+	\item Driving wheel
+	\item Push-pull wheel
+\end{itemize}
+
+The driving wheel has a torque input $\tau_{in}$ at the center of mass which is translated from the driving shaft. On the other hand, a linear force is applying to the CoM of a push/pull wheel. The Normal force $N$ is same in the both wheels acting on the driving/push-pull contact points with the ground $Q_{d/p}$. On the other hand, the friction forces $f_{fr}$ on these two types has different directions and cause contrary effects.
+
+\TODO{add wheel figures}
+
+Note that the friction force on the driving wheel, is pointing to the $(+x)$ and for the push/pull wheel, the direction is $(-x)$. For the driving wheel, $f_{fr}$ causes forward movement and $tau_{in}$ results in rolling. Whereas for the push/pull wheel, moving forward and rolling are results of $P_{in}$ and $f_{fr}$ respectively.
+
+The effect of the torques and forces on the motion of a wheel can also be categorized into:
+\begin{itemize}
+\item Driving Component
+\item Rolling Component
+\item Normal Component
+\end{itemize}
+
+The forces/torques which result in the forward/backward driving of the wheel are among \emph{driving components}. For a driving wheel, friction force and for a push/pull wheel, the input force are driving components. On the other hand, forces/torques which result in rolling motion of the wheel are categorized as rolling components; such as input torque and friction force for driving and push-pull wheels, respectively.
+
+The normal component is also including the forces which are normal to the direction of the linear motion and has no effect on driving and rolling motions of the wheel.
+\section{Driving Wheel On the Flat Surface} \label{DrivingWheel}
+
+Assume that the wheel is driven by driving torque $\tau_{in}$ without any active pulling forces $P_{in}$ (\textcolor{red}{Fig}). This type of wheel is noted as pure driving wheel in the rest of the paper. We need to identify a valid condition for slippage. 
+
+\subsection{Slippage Criteria for a Driving Wheel} \label{SlipCri-DW}
+
+For a pure driving wheel, the decisive variable is the amount of $\tau_{in}$. If $\tau_{in}$ is less than a maximum value of $\tau_{in}^{max}$, then the motion is without slippage. Otherwise, wheel's motion is a combination of rolling and slipping. For a driving wheel, we have the following relations:
+\begin{align}
+F_{fr} &= ma_c \label{f_fr}\\
+\tau_{in} - F_{fr} &= I_c \alpha \label{moment_eq}
+\end{align}
+
+Assuming no slippage condition and considering the maximum possible static force before slippage, we have:
+\begin{align}
+F_{fr}^{max} &= \mu_{s} N \label{f_fr_max} \\
+\alpha &= \frac{a_c}{R} \label{alpha_noSlip}
+\end{align}
+where $\mu_s$ and $R$ are the static friction coefficient and wheel radius. Subsequently, we note he dynamic friction coefficient as $\mu_d$. from~\eqref{f_fr}~and~\eqref{f_fr_max}, we have:
+\begin{align}
+a_c^{max} = \frac{F_{fr}^{max}}{m} = \mu_s g
+\end{align}
+Therefore the maximum input torque to the wheel before starting the slippage is calculated from~\eqref{moment_eq}:
+\begin{align}
+\tau_{in}^{max} = I_c \frac{a_c^{max}}{R} + R F_{fr}^{max}
+\end{align}
+So, the slippage condition for a driving wheel on the flat surface is:
+\begin{align}
+if \begin{cases}
+\tau_{in} \leqslant \tau_{in}^{max} &\Rightarrow \ \text{No Slip} \\
+\text{Otherwise} &\Rightarrow \ \text{Slip}
+\end{cases} \label{slipCondition}
+\end{align}
+In the following two subsections, we are analyzing the wheel dynamics in absence and presence of the slippage.
+\subsection{Driving Wheel Without Slippage}
+As described in~\eqref{slipCondition}, the condition for no slippage is $\tau_{in} \leqslant \tau_{in}^{max}$. Using~\eqref{f_fr},\eqref{moment_eq}~and~\eqref{alpha_noSlip} we have:
+\begin{align*}
+\tau_{in} - ma_c &= I_c \frac{a_c}{R} \\
+\Rightarrow \tau_{in} &= (\frac{I_c}{R} + m)a_c
+\end{align*}
+so then:
+\begin{align}
+a_c = \frac{\tau_{in}}{\frac{I_c}{R} + m}
+\end{align}
+So $\alpha = \frac{a_c}{R}$ is calculated accordingly and the other components at time $t$ are:
+\begin{align}
+v_{c,t} &= a_{c,t}dt + v_{c,t-dt} \label{linearVel}\\
+\omega_{c,t} &= \alpha_{c,t}dt + \omega_{c,t-dt} \label{angularVel}\\
+F_{fr} &= ma_c
+\end{align}
+where $dt$ denotes the duration of each time step. Note that the value of the $F_{fr}$ is not equal to $\mu_sN$ except when it reaches to the slipping limit.
+
+In order to calculate the velocity of each point on the wheel as a rigid body with respect to the inertial frame shown in \textcolor{red}{Fig1}, we use the relative velocity equation. The relative velocity of a point such as $K$ with respect to the inertial frame is $v_{K/O}$ and for simplicity, it is noted as $v_K$.
+\begin{align}
+v_Q = v_{Q/c} + v_c
+\end{align}
+At a specific time, the point $Q$ is a selected as the contact point of the wheel with the ground and fixed to the wheel. By considering no slippage condition, $v_c = R\omega$ and $v_{Q/c} = -R\omega$. So then the velocity of point $Q$ with respect to the inertial frame is becoming $0$.
+
+\TODO{fig2}
+
+If case of $R\omega \neq v_c$, slip occurs. This slippage can be a \emph{forward or backward slippage}. For better imagination of the expression Forward slippage, we can consider a wheel without rolling (or full-brake) and pushing forward. What happens is a pure slippage without any rotation and called Forward slippage. On the other hand, if the wheel just has the rotation in place (without linear velocity), then Backward slippage occurs.
+
+\textcolor{red}{Fig3}
+\subsection{Driving Wheel With Slippage}
+For a driving wheel, $R\omega > v_c$ is possible. This can happen if $\tau_{in} > \tau_{in}^{max}$. In that case, the contact point is slightly sliding on the ground along with the rotary motion of the wheel. So the friction force becomes $F_{fr} = \mu_d N$:
+\begin{align}
+F_{fr} &= \mu_d mg = ma_c \\
+\Rightarrow a_c &= \mu_dg \\
+\tau_{in} - ma_c &= I_c \alpha \\
+\Rightarrow \alpha &= \frac{\tau_{in} - ma_c}{I_c}
+\end{align}
+Then the linear and angular velocities can be computed same as~\eqref{linearVel}~and~\eqref{angularVel}.
+
+\section{Push-pull Wheel On the Flat Surface}
+A push-pull wheel is driven by an exogenous pulling or pushing force $P_{in}$. Therefore, this force is the driving component and the friction force which has the opposite direction, will be the rolling component. In this section, we study the pure push/pull wheel without applying any exogenous torque inputs.
+
+\subsection{Slippage Criteria for a Push-Pull Wheel} \label{SlipCri-PW}
+\subsection{Push-Pull Wheel Without Slippage}
+\subsection{Push-Pull Wheel With Slippage}
+
+
+\section{Parametric Computation of the Point Velocities on the Wheel}
+\textcolor{red}{Figs: Fig4, Figures of the position of the points on the wheel wrt time}
+\section{Generic Scenarios}
+\subsection{Wheel on the tilted surface}
+
+\begin{comment}
 Wheel kinematics and dynamics are widely studied. Considering the multi-directional slippages, due to numerous variables such as wheel inertia, material and contact forces within these models, are challenging.  In sections~\ref{Sec_Kinematics}~and~\ref{Sec_Dynamics}, we describe the proposed method in~\cite{Seegmiller2014thesis}.
 \section{Wheel Kinematics} \label{Sec_Kinematics}
 
@@ -105,6 +214,7 @@ The case study for~\cite{Seegmiller2014thesis} is a car model with six wheels as
 
 \section{Wheel Dynamics} \label{Sec_Dynamics}
 
-\bibliographystyle{ieeetr}
-\bibliography{refs}
+\end{comment}
+%\bibliographystyle{ieeetr}
+%\bibliography{refs}
 \end{document}
