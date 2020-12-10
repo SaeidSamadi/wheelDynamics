@@ -115,13 +115,13 @@ Assume that the wheel is driven by driving torque $\tau_{in}$ without any active
 For a pure driving wheel, the decisive variable is the amount of $\tau_{in}$. If $\tau_{in}$ is less than a maximum value of $\tau_{in}^{max}$, then the motion is without slippage. Otherwise, wheel's motion is a combination of rolling and slipping. For a driving wheel, we have the following relations:
 \begin{align}
 F_{fr} &= ma_c \label{f_fr}\\
-\tau_{in} - F_{fr} &= I_c \alpha \label{moment_eq}
+\tau_{in} - F_{fr} &= I_c \alpha_c \label{moment_eq}
 \end{align}
 
 Assuming no slippage condition and considering the maximum possible static force before slippage, we have:
 \begin{align}
 F_{fr}^{max} &= \mu_{s} N \label{f_fr_max} \\
-\alpha &= \frac{a_c}{R} \label{alpha_noSlip}
+\alpha_c &= \frac{a_c}{R} \label{alpha_noSlip}
 \end{align}
 where $\mu_s$ and $R$ are the static friction coefficient and wheel radius. Subsequently, we note he dynamic friction coefficient as $\mu_d$. from~\eqref{f_fr}~and~\eqref{f_fr_max}, we have:
 \begin{align}
@@ -142,14 +142,14 @@ In the following two subsections, we are analyzing the wheel dynamics in absence
 \subsection{Driving Wheel Without Slippage}
 As described in~\eqref{slipCondition}, the condition for no slippage is $\tau_{in} \leqslant \tau_{in}^{max}$. Using~\eqref{f_fr},\eqref{moment_eq}~and~\eqref{alpha_noSlip} we have:
 \begin{align*}
-\tau_{in} - ma_c &= I_c \frac{a_c}{R} \\
-\Rightarrow \tau_{in} &= (\frac{I_c}{R} + m)a_c
+\tau_{in} - Rma_c &= I_c \frac{a_c}{R} \\
+\Rightarrow \tau_{in} &= (\frac{I_c}{R} + Rm)a_c
 \end{align*}
 so then:
 \begin{align}
-a_c = \frac{\tau_{in}}{\frac{I_c}{R} + m}
+a_c = \frac{\tau_{in}}{\frac{I_c}{R} + Rm}
 \end{align}
-So $\alpha = \frac{a_c}{R}$ is calculated accordingly and the other components at time $t$ are:
+So $\alpha_c = \frac{a_c}{R}$ is calculated accordingly and the other components at time $t$ are:
 \begin{align}
 v_{c,t} &= a_{c,t}dt + v_{c,t-dt} \label{linearVel}\\
 \omega_{c,t} &= \alpha_{c,t}dt + \omega_{c,t-dt} \label{angularVel}\\
@@ -173,8 +173,8 @@ For a driving wheel, $R\omega > v_c$ is possible. This can happen if $\tau_{in} 
 \begin{align}
 F_{fr} &= \mu_d mg = ma_c \\
 \Rightarrow a_c &= \mu_dg \\
-\tau_{in} - ma_c &= I_c \alpha \\
-\Rightarrow \alpha &= \frac{\tau_{in} - ma_c}{I_c}
+\tau_{in} - Rma_c &= I_c \alpha_c \\
+\Rightarrow \alpha_c &= \frac{\tau_{in} - Rma_c}{I_c}
 \end{align}
 Then the linear and angular velocities can be computed same as~\eqref{linearVel}~and~\eqref{angularVel}.
 
@@ -182,7 +182,48 @@ Then the linear and angular velocities can be computed same as~\eqref{linearVel}
 A push-pull wheel is driven by an exogenous pulling or pushing force $P_{in}$. Therefore, this force is the driving component and the friction force which has the opposite direction, will be the rolling component. In this section, we study the pure push/pull wheel without applying any exogenous torque inputs.
 
 \subsection{Slippage Criteria for a Push-Pull Wheel} \label{SlipCri-PW}
+
+Schematic of a push-pull wheel is shown in the following figure.
+
+\textcolor{red}{fig}
+
+The governing Newton-Euler equations for the rigid body are:
+\begin{align}
+P_{in} - F_{fr} &= ma_c \label{PW_force} \\
+RF_{fr} &= I_c \alpha_c \label{PW_torque}
+\end{align}
+The maximum sliding force before slippage is $F_{fr} = \mu_sN$. So,according to the non-slip condition $\alpha_c = \frac{a_c}{R}$,~\eqref{PW_torque} becomes:
+\begin{align}
+R\mu_sN &= I_c \frac{a_c^{max}}{R} \\
+\Rightarrow a_c^{max} &= R^2 \mu_s \frac{N}{I_c} \label{PW_acMax}
+\end{align}
+Now, by combining~\eqref{PW_acMax}~and~\eqref{PW_force}, one can calculate the maximum exogenous input force that can be applied before slipping occurs:
+\begin{align}
+P_{in}^{max} &= ma_c^{max} + \mu_sN \\
+& = \mu_sN (m\frac{R^2}{I_c} + 1)
+\end{align}
+So, the slippage condition for a push-pull wheel on the flat surface is:
+\begin{align}
+if \begin{cases}
+P_{in} \leqslant P_{in}^{max} &\Rightarrow \ \text{No Slip} \\
+\text{Otherwise} &\Rightarrow \ \text{Slip}
+\end{cases} \label{PW_slipCondition}
+\end{align}
 \subsection{Push-Pull Wheel Without Slippage}
+
+The governing equations for the push-pull wheel are introduced by~\eqref{PW_force}~and~\eqref{PW_torque}. By considering the non-slip condition $\alpha_c = \frac{a_c}{R}$, we have:
+\begin{align}
+P_{in} - F_{fr} &= ma_c = \frac{W}{g} a_c \\
+F_{fr} &= \frac{I_c}{R^2} a_c \\
+\Rightarrow P_{in} &= (\frac{W}{g} + \frac{I_c}{R^2})a_c
+\end{align}
+where $W$ is the weight of the wheel. So then the linear acceleration of the CoM of the wheel in no-slip condition is:
+\begin{align}
+a_c &= \frac{P_{in}}{\frac{W}{g} + \frac{I_c}{R^2}} \\
+\alpha_c &= \frac{a_c}{R} \\
+F_{fr} &= \frac{I_c}{R^2} a_c
+\end{align}
+Note that $F_{fr} \neq \mu_{s}N$ unless it reaches to the boundary of starting slippage.
 \subsection{Push-Pull Wheel With Slippage}
 
 
