@@ -92,7 +92,18 @@ We characterize the robot or vehicle wheels into:
 
 The driving wheel has a torque input $\tau_{in}$ at the center of mass which is translated from the driving shaft. On the other hand, a linear force is applying to the CoM of a push/pull wheel. The Normal force $N$ is same in the both wheels acting on the driving/push-pull contact points with the ground $Q_{d/p}$. On the other hand, the friction forces $f_{fr}$ on these two types has different directions and cause contrary effects.
 
-\TODO{add wheel figures}
+\begin{figure}[!h] 
+	\subfigure[]{
+		\includegraphics[height=0.25\columnwidth]{figs/PW.pdf}
+		\label{PW}
+	} 
+	\subfigure[]{
+		\includegraphics[height=0.25\columnwidth]{figs/DW.pdf} \label{DW}
+	} 
+	\caption{Free-body diagram of push-pull (a) and driving (b) wheels}
+	
+	\label{DPW}
+\end{figure}
 
 Note that the friction force on the driving wheel, is pointing to the $(+x)$ and for the push/pull wheel, the direction is $(-x)$. For the driving wheel, $f_{fr}$ causes forward movement and $tau_{in}$ results in rolling. Whereas for the push/pull wheel, moving forward and rolling are results of $P_{in}$ and $f_{fr}$ respectively.
 
@@ -108,14 +119,14 @@ The forces/torques which result in the forward/backward driving of the wheel are
 The normal component is also including the forces which are normal to the direction of the linear motion and has no effect on driving and rolling motions of the wheel.
 \section{Driving Wheel On the Flat Surface} \label{DrivingWheel}
 
-Assume that the wheel is driven by driving torque $\tau_{in}$ without any active pulling forces $P_{in}$ (\textcolor{red}{Fig}). This type of wheel is noted as pure driving wheel in the rest of the paper. We need to identify a valid condition for slippage. 
+Assume that the wheel is driven by driving torque $\tau_{in}$ without any active pulling forces $P_{in}$ as shown in Fig.~\ref{DW}. This type of wheel is noted as driving wheel in the rest of the paper. We need to identify a valid condition for slippage. 
 
 \subsection{Slippage Criteria for a Driving Wheel} \label{SlipCri-DW}
 
 For a pure driving wheel, the decisive variable is the amount of $\tau_{in}$. If $\tau_{in}$ is less than a maximum value of $\tau_{in}^{max}$, then the motion is without slippage. Otherwise, wheel's motion is a combination of rolling and slipping. For a driving wheel, we have the following relations:
 \begin{align}
 F_{fr} &= ma_c \label{f_fr}\\
-\tau_{in} - F_{fr} &= I_c \alpha_c \label{moment_eq}
+\tau_{in} - RF_{fr} &= I_c \alpha_c \label{moment_eq}
 \end{align}
 
 Assuming no slippage condition and considering the maximum possible static force before slippage, we have:
@@ -129,7 +140,7 @@ a_c^{max} = \frac{F_{fr}^{max}}{m} = \mu_s g
 \end{align}
 Therefore the maximum input torque to the wheel before starting the slippage is calculated from~\eqref{moment_eq}:
 \begin{align}
-\tau_{in}^{max} = I_c \frac{a_c^{max}}{R} + R F_{fr}^{max}
+\tau_{in}^{max} = I_c \frac{a_c^{max}}{R} + R F_{fr}^{max} \label{tau_in_max}
 \end{align}
 So, the slippage condition for a driving wheel on the flat surface is:
 \begin{align}
@@ -139,7 +150,7 @@ if \begin{cases}
 \end{cases} \label{slipCondition}
 \end{align}
 In the following two subsections, we are analyzing the wheel dynamics in absence and presence of the slippage.
-\subsection{Driving Wheel Without Slippage}
+\subsection{Driving Wheel Without Slippage} \label{DWNoSlip}
 As described in~\eqref{slipCondition}, the condition for no slippage is $\tau_{in} \leqslant \tau_{in}^{max}$. Using~\eqref{f_fr},\eqref{moment_eq}~and~\eqref{alpha_noSlip} we have:
 \begin{align*}
 \tau_{in} - Rma_c &= I_c \frac{a_c}{R} \\
@@ -157,18 +168,40 @@ F_{fr} &= ma_c
 \end{align}
 where $dt$ denotes the duration of each time step. Note that the value of the $F_{fr}$ is not equal to $\mu_sN$ except when it reaches to the slipping limit.
 
-In order to calculate the velocity of each point on the wheel as a rigid body with respect to the inertial frame shown in \textcolor{red}{Fig1}, we use the relative velocity equation. The relative velocity of a point such as $K$ with respect to the inertial frame is $v_{K/O}$ and for simplicity, it is noted as $v_K$.
+In order to calculate the velocity of each point on the wheel as a rigid body with respect to the inertial frame shown in Fig.~\ref{DPW}, we use the relative velocity equation. The relative velocity of a point such as $K$ with respect to the inertial frame is $v_{K/O}$ and for simplicity, it is noted as $v_K$.
 \begin{align}
 v_Q = v_{Q/c} + v_c
 \end{align}
 At a specific time, the point $Q$ is a selected as the contact point of the wheel with the ground and fixed to the wheel. By considering no slippage condition, $v_c = R\omega$ and $v_{Q/c} = -R\omega$. So then the velocity of point $Q$ with respect to the inertial frame is becoming $0$.
 
-\TODO{fig2}
+\begin{figure}[!h] 
+	\centering
+	\includegraphics[width=0.85\columnwidth]{figs/Vel.pdf}
+	\caption{Kinematic schematic of a driving wheel}
+	\label{velFig}
+\end{figure}
 
-If case of $R\omega \neq v_c$, slip occurs. This slippage can be a \emph{forward or backward slippage}. For better imagination of the expression Forward slippage, we can consider a wheel without rolling (or full-brake) and pushing forward. What happens is a pure slippage without any rotation and called Forward slippage. On the other hand, if the wheel just has the rotation in place (without linear velocity), then Backward slippage occurs.
 
-\textcolor{red}{Fig3}
-\subsection{Driving Wheel With Slippage}
+The term $v_t$ indicates the tangantial velocity of and arbitrary point $A$ on the wheel. If case of $R\omega \neq v_c$, slip occurs. This slippage can be a \emph{forward or backward slippage}. For better imagination of the expression Forward slippage, we can consider a wheel without rolling (or full-brake) and pushing forward. What happens is a pure slippage without any rotation and called Forward slippage. On the other hand, if the wheel just has the rotation in place (without linear velocity), then Backward slippage occurs. Fig.~\ref{SlipDiagram} demonstrates three conditions by point tracking on the wheel over the time. These three conditions are no-slip, backward-slippage and forward-slippage modes.
+
+\begin{figure}[!h] 
+	\subfigure[]{
+		\includegraphics[width=0.95\columnwidth]{figs/NoSlip.pdf}
+		\label{NoSlip}
+	} 
+	\subfigure[]{
+		\includegraphics[width=0.95\columnwidth]{figs/FwSlip.pdf} \label{FwSlip}
+	} 
+	\subfigure[]{
+		\includegraphics[width=0.95\columnwidth]{figs/BwSlip.pdf} \label{BwSlip}
+	} 
+	\caption{Position tracking of point $A$ on the wheel. (a) shows the point tracking in no-slip condition. In this case, wheel has no slippage while rotation. (b) shows the backward-slippage. This can happen for a push-pull wheel where the pulling force causes slippage on the ground. (c) shows the forward slippage which be the case in driving wheels in case of high input torque.}
+	
+	\label{SlipDiagram}
+\end{figure}
+
+
+\subsection{Driving Wheel With Slippage} \label{DWSlip}
 For a driving wheel, $R\omega > v_c$ is possible. This can happen if $\tau_{in} > \tau_{in}^{max}$. In that case, the contact point is slightly sliding on the ground along with the rotary motion of the wheel. So the friction force becomes $F_{fr} = \mu_d N$:
 \begin{align}
 F_{fr} &= \mu_d mg = ma_c \\
@@ -183,10 +216,7 @@ A push-pull wheel is driven by an exogenous pulling or pushing force $P_{in}$. T
 
 \subsection{Slippage Criteria for a Push-Pull Wheel} \label{SlipCri-PW}
 
-Schematic of a push-pull wheel is shown in the following figure.
-
-\textcolor{red}{fig}
-
+Schematic of a push-pull wheel is shown in Fig.~\ref{PW}.
 The governing Newton-Euler equations for the rigid body are:
 \begin{align}
 P_{in} - F_{fr} &= ma_c \label{PW_force} \\
@@ -228,9 +258,116 @@ Note that $F_{fr} \neq \mu_{s}N$ unless it reaches to the boundary of starting s
 
 
 \section{Parametric Computation of the Point Velocities on the Wheel}
-\textcolor{red}{Figs: Fig4, Figures of the position of the points on the wheel wrt time}
+In previous sections, velocity of the points on the wheel is mentioned. Especially when these points touch the ground. Fig.~\ref{SlipDiagram} shows the position tracking of an arbitrary point. In this section, we aim for calculating the velocity of an arbitrary point at a specific time.
+
+Assume that the CoM of the wheel has a linear velocity of $V_x$. On the other hand, the tangantial velocity of the arbitrary point is noted as $V_T$. Fig.~\ref{velocityCalc} shows the schematic of the wheel and point velocity vectors.
+\begin{figure}[!h] 
+	\centering
+	\includegraphics[width=0.85\columnwidth]{figs/velocityCalc.pdf}
+	\caption{Velocity analysis of a rotating wheel}
+	\label{velocityCalc}
+\end{figure}
+
+\begin{align}
+\vec{V}_{tot} &= V_x \hat{x} + V_T \sin(\theta)\hat{x} - V_T \cos(\theta)\hat{y} \\
+\lvert \vec{V}_{tot} \rvert &= \sqrt{\vec{V}_{tot,x}^2 + \vec{V}_{tot,y}^2}
+\end{align}
+
+This formula is general and accounts for every single point chosen on the perimeter of the circle.
 \section{Generic Scenarios}
-\subsection{Wheel on the tilted surface}
+
+A generic scenario includes external forces applied on the wheel on non-flat surfaces. As an example to step into the general scenarios, we first study a driving wheel on the slope.
+We consider a driving wheel on the slope. So, the wheel is under an input torque $\tau_{in}$ which is driving the wheel. First, we divide the scenarios into the following terms:
+\begin{itemize}
+	\item Descending wheel
+	\item Ascending wheel
+\end{itemize}
+
+\subsection{Descending Driving Wheel}
+The wheel has an input torque which helps for going down the slope. The Fig.~\ref{slopeDown} shows schematic of this wheel.
+
+\begin{figure}[!h] 
+	\centering
+	\includegraphics[width=0.85\columnwidth]{figs/slopeDown.pdf}
+	\caption{Descending driving wheel}
+	\label{slopeDown}
+\end{figure}
+
+We consider the sum of all forces applied on the wheel, other than the fricion force, as an external force. So, by considering no exogenous forces, we still have the effect of the weight as $mg\sin(\theta)$. Therefore, $F_{ext} = mg\sin(\theta)$. So, the governing Newton-Euler equations are:
+\begin{align}
+F_{fr} + F_{ext} &= ma_c \label{DWSlope_force} \\
+\tau_{in} - RF_{fr} &= I_c \alpha_c \label{DWSlope_torque}
+\end{align}
+So we can re-write the \eqref{DWSlope_force} as $F_{fr} = ma_c - F_{ext}$ and take the same procedure as Section~\ref{SlipCri-DW} for deriving the slip condition:
+\begin{align}
+a_c^{max} &= \frac{F_{fr}^{max} + F_{ext}}{m} \\
+\alpha_c^{max} &= \frac{a_c^{max}}{R}
+\end{align}
+where $F_{fr}^{max}$ is same as~\eqref{f_fr_max}. So, $\tau_{in}^{max}$ can be computed by \eqref{tau_in_max}.
+\subsubsection{Descending Without Slippage}
+By taking same computation procedure of Section~\ref{DWNoSlip}, we have
+\begin{align}
+a_c = \frac{\tau_{in} + R F_{ext}}{\frac{I_c}{R} + Rm}
+\end{align}
+
+\subsubsection{Descending With Slippage}
+If slippage occurs, we use Section~\ref{DWSlip} for computations which results in
+\begin{align}
+a_c &= \mu_dg + \frac{F_{ext}}{m} \\
+\alpha_c &= \frac{\tau_{in} - \mu_d N R}{I_c}
+\end{align}
+
+Note that for descending of the wheel, $\tau_{in} \geqslant 0$ in the direction shown in the figure is enough. Because due to the gravity, the wheel has tendency to go down the slop even without the input torque.
+\subsection{Ascending Driving Wheel}
+In contrast to the previous section, the input torque is applied in order to climb. The Fig.~\ref{slopeUp} shows the schematic of this condition.
+
+\begin{figure}[!h] 
+	\centering
+	\includegraphics[width=0.85\columnwidth]{figs/slopeUp.pdf}
+	\caption{Ascending driving wheel}
+	\label{slopeUp}
+\end{figure}
+
+
+Same as previous section, we consider no exogenous external forces applied to the wheel. So, $F_{ext} = mg\sin(\theta)$ and the Newton-Euler equation of the rigid body is:
+
+\begin{align}
+-F_{fr} + F_{ext} &= ma_c \label{DWSlope_force_ac} \\
+-\tau_{in} + RF_{fr} &= I_c \alpha_c \label{DWSlope_torque_ac}
+\end{align}
+and the maximum linear and rotational accelerations are:
+
+\begin{align}
+a_c^{max} &= \frac{-F_{fr}^{max} + F_{ext}}{m} \\
+\alpha_c^{max} &= \frac{a_c^{max}}{R}
+\end{align}
+
+Then we achieve the slippage criteria by computing $F_{fr}^{max}$ and $\tau_{in}^{max}$ as mentioned in~\eqref{f_fr_max}~and~\eqref{tau_in_max}. On the other hand, we need to guarantee ascending of the wheel. For this purpose, we have to define a minimum input torque which should be applied to the wheel in order to have ascending motion. For a wheel on the slope, $a_c = 0$ and $\alpha_c = 0 $ are required (but not sufficient) conditions in order to be fixed in place and avoid descending. So, by considering these conditions, we have:
+\begin{align}
+F_{fr} &= F_{ext} \\
+\tau_{in} &= RF_{fr}
+\end{align}
+Above equations are resulting in $\tau_{in} = RF_{ext}$. So, to guarantee the ascending motion of the wheel, we need to fulfill the following equation:
+\begin{align}
+\tau_{in} \geqslant R mg\sin(\theta)
+\end{align}
+This is in case of existence of no exogenous forces acting on the robot. By considering the exogenous forces $F_{exogenous}$, we can extend this criteria to
+\begin{align}
+\tau_{in} \geqslant R mg\sin(\theta) + F_{exogenous}
+\end{align}
+\subsubsection{Ascending Without Slippage}
+Calculating the linear acceleration can provide the rotational acceleration by $\alpha_c = \frac{a_c}{R}$
+\begin{align}
+a_c = \frac{-\tau_{in} + R F_{ext}}{\frac{I_c}{R} + Rm}
+\end{align}
+
+\subsubsection{Ascending With Slippage}
+In case of slippage, using the same calculations as Section~\ref{DWSlip} we have
+\begin{align}
+a_c &= -\mu_dg + \frac{F_{ext}}{m} \\
+\alpha_c &= \frac{-\tau_{in} + \mu_d N R}{I_c}
+\end{align}
+
 
 \begin{comment}
 Wheel kinematics and dynamics are widely studied. Considering the multi-directional slippages, due to numerous variables such as wheel inertia, material and contact forces within these models, are challenging.  In sections~\ref{Sec_Kinematics}~and~\ref{Sec_Dynamics}, we describe the proposed method in~\cite{Seegmiller2014thesis}.
